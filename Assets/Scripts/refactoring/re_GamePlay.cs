@@ -55,7 +55,7 @@ public class re_GamePlay : MonoBehaviour
     
     public void GameStart(int players, int playerNo, bool itemMode)
     {
-        clearMap();
+        clearBlock();
         
         gameEnd = false;
         
@@ -121,8 +121,8 @@ public class re_GamePlay : MonoBehaviour
             offset_y = 3;
         }
 
-        CreateBackground();
-        CreateBoardColumn();
+        // CreateBackground();
+        // CreateBoardColumn();
         CreateTetromino();
     }
     
@@ -412,12 +412,12 @@ public class re_GamePlay : MonoBehaviour
                 }
                 else if (playerNo == 3)
                 {
-                    if (Input.GetKeyDown("8") && bombItem > 0)
+                    if (Input.GetKeyDown("-") && bombItem > 0)
                     {
                         DestroyLineByItem();
                     }
 
-                    if (Input.GetKeyDown("9") && changeItem > 0)
+                    if (Input.GetKeyDown("+") && changeItem > 0)
                     {
                         ChangeNextByItem();
                     }
@@ -593,14 +593,8 @@ public class re_GamePlay : MonoBehaviour
         return true;
     }
     
-    private void clearMap()
+    private void clearBlock()
     {
-        
-        foreach (Transform child in boardNode)
-        {
-            // 기존 타일 삭제
-            Destroy(child.gameObject);
-        }
         foreach (Transform child in tetrominoNode)
         {
             // 기존 테트로미노 타일 삭제
@@ -611,17 +605,12 @@ public class re_GamePlay : MonoBehaviour
             // 기존 미리보기 타일 삭제
             Destroy(child.gameObject);
         }
-        foreach (Transform child in backgroundNode)
-        {
-            // 기존 배경 타일 삭제
-            Destroy(child.gameObject);
-        }
         
     }
     
     void DestroyLineByItem()
     {
-        var bottom = boardNode.Find("0");
+        var bottom = boardNode.Find((0 + offset_y).ToString());
         foreach (Transform tile in bottom) 
         {
             Destroy((tile.gameObject));
@@ -656,7 +645,7 @@ public class re_GamePlay : MonoBehaviour
             GameEndOn?.Invoke(playerNo, scoreVal, levelVal, "win");
         }
         
-        for (int i = 1; i < boardNode.childCount; ++i)
+        for (int i = 1 + offset_y; i < boardNode.childCount; ++i)
         {
             var column = boardNode.Find(i.ToString());
             
