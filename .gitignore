@@ -1,0 +1,15 @@
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Ll]ogs/
+**/.vs/
+**/[Uu]serSettings/
+
+**/*_ios/
+**/*.csproj
+**/*.unityproj
+**/*.sln
+
+**/.DS_Store
+
+**/.idea
