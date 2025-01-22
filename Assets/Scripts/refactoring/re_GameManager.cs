@@ -6,11 +6,8 @@ public class re_GameManager : MonoBehaviour
 {
     [Header("GameSystem")]
     [SerializeField] private re_GamePlay player1;
-    [SerializeField] private re_GameMap player1Map;
     [SerializeField] private re_GamePlay player2;
-    [SerializeField] private re_GameMap player2Map;
     [SerializeField] private re_GamePlay player3;
-    [SerializeField] private re_GameMap player3Map;
     private int players;
     private List<int> deadPlayers;
     private int[] player1Record;
@@ -66,15 +63,12 @@ public class re_GameManager : MonoBehaviour
         playUI.SetActive(true);
         playBgm.Play();
         
-        player1Map?.CreateMap(this.players, 1);
-        player1?.GameStart(this.players, 1, itemMode);
-        player2Map?.CreateMap(this.players, 2);
-        player2?.GameStart(this.players, 2, itemMode);
-        player3Map?.CreateMap(this.players, 3);
-        player3?.GameStart(this.players, 3, itemMode);
+        player1?.GameStart(this.players, 1, itemMode, new re_GameKey.Player1Key());
+        player2?.GameStart(this.players, 2, itemMode, new re_GameKey.Player2Key());
+        player3?.GameStart(this.players, 3, itemMode, new re_GameKey.Player3Key());
     }
     
-    private void playingUpdate(int player, int score, int level, string result)
+    private void playingUpdate(int player, string result)
     {
         int winner = 1;
         

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class re_GameMap : MonoBehaviour
@@ -11,30 +9,18 @@ public class re_GameMap : MonoBehaviour
     
     [Header("Setting")]
     [Range(4, 40)]
-    private int boardWidth = 10;
+    private static int boardWidth = 10;
     [Range(5, 20)]
-    private int boardHeight = 20;
-    private int offset_x = 0;
-    private int offset_y = 0;
-    private int halfWidth;
-    private int halfHeight;
+    private static int boardHeight = 20;
+    private int offset_x;
+    private int offset_y;
+    private int halfWidth = Mathf.RoundToInt(boardWidth * 0.5f);
+    private int halfHeight = Mathf.RoundToInt(boardHeight * 0.5f);
 
-    public void CreateMap(int players, int playerNo)
+    public void CreateMap(int players, int playerNo, int offset_x, int offset_y)
     {
-        halfWidth = Mathf.RoundToInt(boardWidth * 0.5f);
-        halfHeight = Mathf.RoundToInt(boardHeight * 0.5f);
-        
-        int playableWidth = boardWidth + 1;
-        
-        if (players == 2)
-        {
-            offset_x = (playerNo - 1) * (playableWidth + 2) - (playableWidth / 2 + 1);
-        }
-        else if (players == 3)
-        {
-            offset_x = (playerNo - 1) * (playableWidth + 2) - (playableWidth + 2);
-            offset_y = 3;
-        }
+        this.offset_x = offset_x;
+        this.offset_y = offset_y;
         
         clearMap();
         createBackground();
